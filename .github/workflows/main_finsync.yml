@@ -25,9 +25,9 @@ jobs:
         run: |
           npm install
           npm run build
-          # Removed npm test to avoid workflow failure
+          cp web.config build/web.config  # 把 web.config 放到 build 文件夹
 
-      - name: Upload build artifact
+      - name: Upload build folder
         uses: actions/upload-artifact@v4
         with:
           name: react-build
