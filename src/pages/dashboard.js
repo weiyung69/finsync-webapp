@@ -28,8 +28,18 @@ function Dashboard() {
 
   // ✅ Fetch API data
   useEffect(() => {
-    fetch("/invoicecontact.php") // Using React proxy
-      .then((res) => res.json())
+    // 根据环境选择 API URL
+    const API_URL = process.env.NODE_ENV === "production"
+      ? "https://jacfintech.com/crmdemo/api/invoicecontact.php" // ✅ 替换成真实外部 API 地址
+      : "/invoicecontact.php"; // ✅ 本地继续用 proxy
+
+    fetch(API_URL)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data.status === "success" && Array.isArray(data.merged_data)) {
           setInvoices(data.merged_data);
