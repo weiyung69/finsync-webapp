@@ -1,157 +1,31 @@
-/* 基础布局 */
-.dashboard-container {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #000000, #1a1a1a); /* 黑色渐变背景 */
-  color: #FFD700; /* 金色字体 */
-}
-
-/* 顶部导航 */
-.dashboard-header {
-  background-color: #000000; /* 黑色背景 */
-  color: #FFD700; /* 金色字体 */
-  padding: 12px 20px;
+.whatsapp-button {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  border-bottom: 2px solid #FFD700; /* 金色边框 */
-  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
-}
-
-.menu-button {
-  font-size: 24px;
-  background: none;
-  border: none;
-  color: #FFD700;
-  cursor: pointer;
-}
-
-/* 侧边栏 */
-.sidebar {
-  position: fixed;
-  top: 50px;
-  left: -220px;
-  width: 220px;
-  height: 100%;
-  background-color: #111111; /* 深黑背景 */
-  transition: left 0.3s ease;
-  padding-top: 20px;
-  border-right: 2px solid #FFD700;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-}
-
-.sidebar.open {
-  left: 0;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li {
+  justify-content: center;
+  gap: 8px;
   padding: 12px 20px;
-  cursor: pointer;
-  color: #FFD700;
-  transition: background 0.3s ease;
-}
-
-.sidebar li:hover {
-  background-color: rgba(255, 215, 0, 0.1);
-}
-
-.sidebar .logout-link {
-  color: #FF4500; /* 红色退出按钮 */
-}
-
-/* 筛选栏 */
-.filter-bar {
-  display: flex;
-  gap: 10px;
-  padding: 12px 20px;
-  background-color: #111111;
-  border-bottom: 1px solid #FFD700;
-}
-
-.filter-bar select {
-  padding: 8px;
-  font-size: 14px;
-  background-color: #000000;
-  color: #FFD700;
-  border: 1px solid #FFD700;
-  border-radius: 4px;
-}
-
-/* 桌面表格 */
-.invoice-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px;
-  color: #FFD700;
-}
-
-.invoice-table th,
-.invoice-table td {
-  border: 1px solid #FFD700;
-  padding: 8px;
-  text-align: left;
-}
-
-.invoice-table th {
-  background-color: #000000;
-  color: #FFD700;
-}
-
-/* WhatsApp 按钮 */
-.whatsapp-button {
-  display: inline-block;
-  padding: 6px 12px;
-  background-color: #25d366;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-/* 手机卡片布局 */
-.invoice-cards {
-  display: none; /* 默认隐藏，手机显示 */
-  padding: 10px;
-}
-
-.invoice-card {
-  background-color: #111111;
-  border: 1px solid #FFD700;
+  background: linear-gradient(135deg, #000000, #1a1a1a); /* 黑色渐变 */
+  color: #FFD700; /* 金色字体 */
+  border: 2px solid #FFD700; /* 金色边框 */
   border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 6px rgba(255, 215, 0, 0.3);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
 }
 
-.invoice-card h3 {
-  margin: 0 0 10px;
-  color: #FFD700;
+.whatsapp-button::before {
+  content: url('https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg'); /* WhatsApp Logo */
+  display: inline-block;
+  width: 20px;
+  height: 20px;
 }
 
-.invoice-card p {
-  margin: 5px 0;
-  color: #FFD700;
-}
-
-/* 响应式：手机布局 */
-@media (max-width: 768px) {
-  .invoice-table {
-    display: none; /* 手机隐藏表格 */
-  }
-
-  .invoice-cards {
-    display: block; /* 手机显示卡片 */
-  }
-
-  .filter-bar {
-    flex-direction: column;
-    gap: 8px;
-  }
+.whatsapp-button:hover {
+  background: linear-gradient(135deg, #FFD700, #FFC107); /* 悬停时金色渐变 */
+  color: #000000; /* 黑色字体 */
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(255, 215, 0, 0.6);
 }
