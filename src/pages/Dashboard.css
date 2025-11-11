@@ -5,18 +5,18 @@
   flex-direction: column;
   min-height: 100vh;
   background: radial-gradient(circle at top left, #1a1a1a, #000000);
-  color: #FFD700;
+  color: #FFFFFF; /* 全局文字白色 */
 }
 
 /* 顶部导航 */
 .dashboard-header {
   background: rgba(0, 0, 0, 0.85);
-  color: #FFD700;
+  color: #FFFFFF;
   padding: 14px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid #FFD700;
+  border-bottom: 2px solid #FFD700; /* 金色边框 */
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
 }
 
@@ -24,7 +24,7 @@
   font-size: 24px;
   background: none;
   border: none;
-  color: #FFD700;
+  color: #FFFFFF;
   cursor: pointer;
 }
 
@@ -54,7 +54,7 @@
 .sidebar li {
   padding: 14px 20px;
   cursor: pointer;
-  color: #FFD700;
+  color: #FFFFFF;
   transition: background 0.3s ease;
 }
 
@@ -79,7 +79,7 @@
   padding: 8px;
   font-size: 14px;
   background: #000000;
-  color: #FFD700;
+  color: #FFFFFF;
   border: 1px solid #FFD700;
   border-radius: 6px;
 }
@@ -89,6 +89,7 @@
   width: 100%;
   border-collapse: collapse;
   margin: 20px;
+  color: #FFFFFF;
 }
 
 .invoice-table th,
@@ -100,7 +101,7 @@
 
 .invoice-table th {
   background: rgba(0, 0, 0, 0.9);
-  color: #FFD700;
+  color: #FFFFFF;
 }
 
 .invoice-table tr:hover {
@@ -143,12 +144,12 @@
 
 .invoice-card h3 {
   margin: 0 0 10px;
-  color: #FFD700;
+  color: #FFFFFF;
 }
 
 .invoice-card p {
   margin: 6px 0;
-  color: #FFD700;
+  color: #FFFFFF;
 }
 
 /* 响应式 */
