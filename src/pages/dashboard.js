@@ -153,13 +153,15 @@ function Dashboard() {
                     <td>{item.customer_phone}</td>
                     <td>
                       <a
-                        href={`https://wa.me/${item.customer_phone.replace(/\D/g, "")}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="whatsapp-button"
-                      >
-                        WhatsApp
-                      </a>
+                      href={`https://wa.me/${item.customer_phone.replace(/\D/g, "")}?text=${encodeURIComponent(
+                      `Hi ${item.customer_name}, your invoice #${item.prefix}${item.number} for ${item.total} ${item.symbol} is currently ${statusMap[item.status]}. Kindly complete the payment before ${item.date}. Thank you!`
+                      )}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="whatsapp-button"
+>
+  WhatsApp
+</a>
                     </td>
                   </tr>
                 ))}

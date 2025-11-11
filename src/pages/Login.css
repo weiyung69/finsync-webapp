@@ -4,40 +4,79 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: linear-gradient(135deg, #0078D4, #00A4EF);
-  color: #fff;
-  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #000000, #1a1a1a);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  padding: 20px;
 }
 
 .login-box {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 40px;
-  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  border-radius: 12px;
   text-align: center;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  border: 1px solid #FFD700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  max-width: 400px;
+  width: 100%;
 }
 
 .login-box h1 {
-  margin-bottom: 20px;
-  font-size: 32px;
+  margin-bottom: 15px;
+  font-size: 28px;
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
 }
 
 .login-box p {
-  margin-bottom: 30px;
-  font-size: 18px;
+  margin-bottom: 25px;
+  font-size: 16px;
+  color: #FFD700;
 }
 
-.login-button {
-  padding: 12px 24px;
-  background-color: #fff;
-  color: #0078D4;
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
+.microsoft-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background-color: #000000;
+  color: #FFD700;
+  border: 2px solid #FFD700;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+  width: 100%;
 }
 
-.login-button:hover {
-  background-color: #e6e6e6;
+.microsoft-login img {
+  width: 20px;
+  height: 20px;
+}
+
+.microsoft-login:hover {
+  background: linear-gradient(135deg, #FFD700, #FFC107);
+  color: #000000;
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(255, 215, 0, 0.6);
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 20px;
+  }
+  .login-box h1 {
+    font-size: 24px;
+  }
+  .login-box p {
+    font-size: 14px;
+  }
+  .microsoft-login {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
 }

@@ -21,10 +21,10 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login-box">
-        <h1>Welcome to My App</h1>
-        <p>Please sign in using Azure AD</p>
+        <h1>Finsync Whatsapp App</h1>
+        <p>Please sign in using Microsoft Account</p>
         <button className="login-button" onClick={handleLogin}>
-          Sign in with Azure AD
+          Microsoft Account
         </button>
       </div>
     </div>
