@@ -1,31 +1,166 @@
-.whatsapp-button {
+/* 整体布局 */
+.dashboard-container {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #1a1a1a, #000000);
+  color: #FFD700;
+}
+
+/* 顶部导航 */
+.dashboard-header {
+  background: rgba(0, 0, 0, 0.85);
+  color: #FFD700;
+  padding: 14px 24px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background: linear-gradient(135deg, #000000, #1a1a1a); /* 黑色渐变 */
-  color: #FFD700; /* 金色字体 */
-  border: 2px solid #FFD700; /* 金色边框 */
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
+  justify-content: space-between;
+  border-bottom: 2px solid #FFD700;
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
 }
 
-.whatsapp-button::before {
-  content: url('https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg'); /* WhatsApp Logo */
+.menu-button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #FFD700;
+  cursor: pointer;
+}
+
+/* 侧边栏 */
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: -240px;
+  width: 240px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  transition: left 0.3s ease;
+  padding-top: 20px;
+  border-right: 2px solid #FFD700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 14px 20px;
+  cursor: pointer;
+  color: #FFD700;
+  transition: background 0.3s ease;
+}
+
+.sidebar li:hover {
+  background: rgba(255, 215, 0, 0.15);
+}
+
+.sidebar .logout-link {
+  color: #FF4500;
+}
+
+/* 筛选栏 */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  padding: 14px 24px;
+  background: rgba(0, 0, 0, 0.85);
+  border-bottom: 1px solid #FFD700;
+}
+
+.filter-bar select {
+  padding: 8px;
+  font-size: 14px;
+  background: #000000;
+  color: #FFD700;
+  border: 1px solid #FFD700;
+  border-radius: 6px;
+}
+
+/* 表格 */
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px;
+}
+
+.invoice-table th,
+.invoice-table td {
+  border: 1px solid #FFD700;
+  padding: 10px;
+  text-align: left;
+}
+
+.invoice-table th {
+  background: rgba(0, 0, 0, 0.9);
+  color: #FFD700;
+}
+
+.invoice-table tr:hover {
+  background: rgba(255, 215, 0, 0.1);
+}
+
+/* WhatsApp 按钮 */
+.whatsapp-button {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, #FFD700, #FFC107);
+  color: #000000;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+  transition: all 0.3s ease;
 }
 
 .whatsapp-button:hover {
-  background: linear-gradient(135deg, #FFD700, #FFC107); /* 悬停时金色渐变 */
-  color: #000000; /* 黑色字体 */
+  background: linear-gradient(135deg, #FFC107, #FFD700);
   transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(255, 215, 0, 0.6);
+}
+
+/* 手机卡片 */
+.invoice-cards {
+  display: none;
+  padding: 10px;
+}
+
+.invoice-card {
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid #FFD700;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+.invoice-card h3 {
+  margin: 0 0 10px;
+  color: #FFD700;
+}
+
+.invoice-card p {
+  margin: 6px 0;
+  color: #FFD700;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .invoice-table {
+    display: none;
+  }
+  .invoice-cards {
+    display: block;
+  }
+  .filter-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

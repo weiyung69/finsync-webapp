@@ -154,7 +154,7 @@ function Dashboard() {
                     <td>
                       <a
                       href={`https://wa.me/${item.customer_phone.replace(/\D/g, "")}?text=${encodeURIComponent(
-                      `Hi ${item.customer_name}, your invoice #${item.prefix}${item.number} for ${item.total} ${item.symbol} is currently ${statusMap[item.status]}. Kindly complete the payment before ${item.date}. Thank you!`
+                      `Hi ${item.customer_name}, your invoice #${item.prefix}${item.number} for ${item.symbol} ${item.total} is currently ${statusMap[item.status]}. Kindly complete the payment before ${item.date}. Thank you!`
                       )}`}
   target="_blank"
   rel="noopener noreferrer"
