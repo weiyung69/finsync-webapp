@@ -28,10 +28,10 @@ function Dashboard() {
 
   // ✅ Fetch API data
   useEffect(() => {
-    // 根据环境选择 API URL
-    const API_URL = process.env.NODE_ENV === "production"
-      ? "https://jacfintech.com/crmdemo/api/invoicecontact.php" // ✅ 替换成真实外部 API 地址
-      : "/invoicecontact.php"; // ✅ 本地继续用 proxy
+    const API_URL =
+      process.env.NODE_ENV === "production"
+        ? "https://jacfintech.com/crmdemo/api/invoicecontact.php"
+        : "/invoicecontact.php";
 
     fetch(API_URL)
       .then((res) => {
@@ -57,9 +57,7 @@ function Dashboard() {
 
   // ✅ Filter logic
   const filteredInvoices = invoices.filter((item) => {
-    const matchesMonth = monthFilter
-      ? item.date.startsWith(monthFilter)
-      : true;
+    const matchesMonth = monthFilter ? item.date.startsWith(monthFilter) : true;
     const matchesStatus = statusFilter
       ? statusMap[item.status] === statusFilter
       : true;
@@ -73,10 +71,20 @@ function Dashboard() {
       : new Date(a.date) - new Date(b.date);
   });
 
-  // ✅ Generate month options (sorted newest → oldest)
+  // ✅ Generate month options
   const uniqueMonths = [
     ...new Set(invoices.map((item) => item.date.slice(0, 7)))
   ].sort((a, b) => new Date(b) - new Date(a));
+
+  // ✅ WhatsApp URL generator
+  const getWhatsAppUrl = (phone, message) => {
+    const cleanPhone = phone.replace(/\D/g, "");
+    const encodedMessage = encodeURIComponent(message);
+    const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+    return isMobile
+      ? `whatsapp://send?phone=${cleanPhone}&text=${encodedMessage}`
+      : `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
+  };
 
   return (
     <div className="dashboard-container">
@@ -93,27 +101,42 @@ function Dashboard() {
         <ul>
           <li>Profile</li>
           <li>Settings</li>
-          <li onClick={handleLogout} className="logout-link">Logout</li>
+          <li onClick={handleLogout} className="logout-link">
+            Logout
+          </li>
         </ul>
       </nav>
 
       {/* Filter Bar */}
       <div className="filter-bar">
-        <select value={monthFilter} onChange={(e) => setMonthFilter(e.target.value)}>
+        <select
+          value={monthFilter}
+          onChange={(e) => setMonthFilter(e.target.value)}
+        >
           <option value="">All Months</option>
           {uniqueMonths.map((month) => (
-            <option key={month} value={month}>{month}</option>
+            <option key={month} value={month}>
+              {month}
+            </option>
           ))}
         </select>
 
-        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+        >
           <option value="">All Status</option>
           {Object.values(statusMap).map((status) => (
-            <option key={status} value={status}>{status}</option>
+            <option key={status} value={status}>
+              {status}
+            </option>
           ))}
         </select>
 
-        <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+        <select
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+        >
           <option value="newest">Newest First</option>
           <option value="oldest">Oldest First</option>
         </select>
@@ -143,53 +166,55 @@ function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                {sortedInvoices.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.prefix}{item.number}</td>
-                    <td>{item.date}</td>
-                    <td>{item.total} {item.symbol}</td>
-                    <td>{statusMap[item.status] || "Unknown"}</td>
-                    <td>{item.customer_name}</td>
-                    <td>{item.customer_phone}</td>
-                    <td>
-                      
-<a
-  href={`https://wa.me/${item.customer_phone.replace(/\D/g, "")}?text=${encodeURIComponent(
-    `Hi ${item.customer_name}, your invoice #${item.prefix}${item.number} for ${item.symbol} ${item.total} is currently ${statusMap[item.status]}. Kindly complete the payment before ${item.date}. Thank you!`
-  )}`}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="whatsapp-button"
->
-  WhatsApp
-</a>
-
-                    </td>
-                  </tr>
-                ))}
+                {sortedInvoices.map((item, index) => {
+                  const message = `Hi ${item.customer_name}, your invoice #${item.prefix}${item.number} for ${item.symbol} ${item.total} is currently ${statusMap[item.status]}. Kindly complete the payment before ${item.date}. Thank you!`;
+                  return (
+                    <tr key={index}>
+                      <td>{item.prefix}{item.number}</td>
+                      <td>{item.date}</td>
+                      <td>{item.total} {item.symbol}</td>
+                      <td>{statusMap[item.status] || "Unknown"}</td>
+                      <td>{item.customer_name}</td>
+                      <td>{item.customer_phone}</td>
+                      <td>
+                        <a
+                          href={getWhatsAppUrl(item.customer_phone, message)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="whatsapp-button"
+                        >
+                          WhatsApp
+                        </a>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
 
             {/* Mobile Cards */}
             <div className="invoice-cards">
-              {sortedInvoices.map((item, index) => (
-                <div key={index} className="invoice-card">
-                  <h3>{item.prefix}{item.number}</h3>
-                  <p><strong>Date:</strong> {item.date}</p>
-                  <p><strong>Amount:</strong> {item.total} {item.symbol}</p>
-                  <p><strong>Status:</strong> {statusMap[item.status] || "Unknown"}</p>
-                  <p><strong>Company:</strong> {item.customer_name}</p>
-                  <p><strong>Phone:</strong> {item.customer_phone}</p>
-                  <a
-                    href={`https://wa.me/${item.customer_phone.replace(/\D/g, "")}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="whatsapp-button"
-                  >
-                    WhatsApp
-                  </a>
-                </div>
-              ))}
+              {sortedInvoices.map((item, index) => {
+                const message = `Hi ${item.customer_name}, your invoice #${item.prefix}${item.number} for ${item.symbol} ${item.total} is currently ${statusMap[item.status]}. Kindly complete the payment before ${item.date}. Thank you!`;
+                return (
+                  <div key={index} className="invoice-card">
+                    <h3>{item.prefix}{item.number}</h3>
+                    <p><strong>Date:</strong> {item.date}</p>
+                    <p><strong>Amount:</strong> {item.total} {item.symbol}</p>
+                    <p><strong>Status:</strong> {statusMap[item.status] || "Unknown"}</p>
+                    <p><strong>Company:</strong> {item.customer_name}</p>
+                    <p><strong>Phone:</strong> {item.customer_phone}</p>
+                    <a
+                      href={getWhatsAppUrl(item.customer_phone, message)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="whatsapp-button"
+                    >
+                      WhatsApp
+                    </a>
+                  </div>
+                );
+              })}
             </div>
           </>
         )}
