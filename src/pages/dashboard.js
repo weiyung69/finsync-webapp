@@ -99,8 +99,6 @@ function Dashboard() {
       {/* Sidebar */}
       <nav className={`sidebar ${menuOpen ? "open" : ""}`}>
         <ul>
-          <li>Profile</li>
-          <li>Settings</li>
           <li onClick={handleLogout} className="logout-link">
             Logout
           </li>

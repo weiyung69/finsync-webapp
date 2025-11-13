@@ -1,12 +1,15 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useMsal } from "@azure/msal-react";
+import { useIsAuthenticated } from "@azure/msal-react";
 
 function ProtectedRoute({ children }) {
-  const { accounts } = useMsal();
-  const isAuthenticated = accounts.length > 0;
+  const isAuthenticated = useIsAuthenticated();
 
-  return isAuthenticated ? children : <Navigate to="/" />;
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />; // ✅ 跳回登录页并替换历史记录
+  }
+
+  return children;
 }
 
 export default ProtectedRoute;
